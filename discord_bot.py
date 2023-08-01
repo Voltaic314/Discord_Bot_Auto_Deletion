@@ -7,7 +7,7 @@ What channel to delete from and how long should the messages last.
 import discord
 import asyncio
 import time
-import config
+import secrets
 
 
 class Focus_Bot_Client(discord.Client):
@@ -33,9 +33,9 @@ class Focus_Bot_Client(discord.Client):
 
         # PLEASE NOTE: if you input your server id and the channel id, you need to replace the quotes as well.
         # Just input the numbers without quotes around them.
-        server_id = config.secret_stuff["server_id"]
+        server_id = secrets.secret_stuff["server_id"]
         guild = client.get_guild(server_id)
-        auto_delete_channel = guild.get_channel(config.secret_stuff["auto_delete_channel_id"])
+        auto_delete_channel = guild.get_channel(secrets.secret_stuff["auto_delete_channel_id"])
 
         # now we'll look to see if any messages need to be deleted from the auto delete channel
         # if so, then delete them, if not just ignore.
@@ -54,5 +54,5 @@ class Focus_Bot_Client(discord.Client):
 
 client = Focus_Bot_Client()
 tree = discord.app_commands.CommandTree(client)
-TOKEN = config.secret_stuff["discord_bot_api_token"]
+TOKEN = secrets.secret_stuff["discord_bot_api_token"]
 client.run(TOKEN)
