@@ -30,6 +30,8 @@ class Focus_Bot_Client(discord.Client):
     async def bot_routines(self):
         await self.wait_until_ready()
 
+        # PLEASE NOTE: if you input your server id and the channel id, you need to replace the quotes as well.
+        # Just input the numbers without quotes around them.
         server_id = "Your_Server_ID_Here"
         guild = client.get_guild(server_id)
         auto_delete_channel = guild.get_channel("Your_Channel_ID_Here")
@@ -40,8 +42,8 @@ class Focus_Bot_Client(discord.Client):
             async for message in auto_delete_channel.history(limit=None, oldest_first=True):
 
                 time_difference_of_current_vs_input = message.created_at.timestamp() - time.time()
-                one_day_in_epoch_seconds = 86400
-                message_is_overdue_for_deletion = time_difference_of_current_vs_input >= one_day_in_epoch_seconds
+                message_expiration_time_in_seconds = 86400
+                message_is_overdue_for_deletion = time_difference_of_current_vs_input >= message_expiration_time_in_seconds
 
                 if not message.pinned and message_is_overdue_for_deletion:
                     await message.delete()
