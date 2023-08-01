@@ -32,9 +32,9 @@ class Focus_Bot_Client(discord.Client):
 
         # PLEASE NOTE: if you input your server id and the channel id, you need to replace the quotes as well.
         # Just input the numbers without quotes around them.
-        server_id = "Your_Server_ID_Here"
+        server_id = 223662908582658048
         guild = client.get_guild(server_id)
-        auto_delete_channel = guild.get_channel("Your_Channel_ID_Here")
+        auto_delete_channel = guild.get_channel(1084927876840833275)
 
         # now we'll look to see if any messages need to be deleted from the auto delete channel
         # if so, then delete them, if not just ignore.
