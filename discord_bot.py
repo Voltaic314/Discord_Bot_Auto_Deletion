@@ -41,10 +41,12 @@ class Focus_Bot_Client(discord.Client):
         # if so, then delete them, if not just ignore.
         while True:
             async for message in auto_delete_channel.history(limit=None, oldest_first=True):
-
-                time_difference_of_current_vs_input = message.created_at.timestamp() - time.time()
-                message_expiration_time_in_seconds = 86400
-                message_is_overdue_for_deletion = time_difference_of_current_vs_input >= message_expiration_time_in_seconds
+                current_time = time.time()
+                desired_hours_until_deletion = 24
+                number_of_seconds_in_an_hour = 3600
+                expiration_time_in_seconds = number_of_seconds_in_an_hour * desired_hours_until_deletion
+                time_difference = current_time - message.created_at.timestamp()
+                message_is_overdue_for_deletion = time_difference >= expiration_time_in_seconds
 
                 if not message.pinned and message_is_overdue_for_deletion:
                     await message.delete()
